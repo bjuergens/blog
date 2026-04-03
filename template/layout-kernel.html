@@ -7,25 +7,35 @@
   $if(date)$<meta name="date" content="$date$">$endif$
   <link rel="stylesheet" href="css/kernel.min.css">
 </head>
-<body>
-  <header>
-    <nav>
-      <a href="index-kernel.html">Home</a>
-      $if(theme-switch-url)$
-      <a href="$theme-switch-url$">Switch to ellegant theme</a>
-      $endif$
-    </nav>
-    $if(title)$<h1>$title$</h1>$endif$
-    $if(date)$<p><time datetime="$date$">$date$</time></p>$endif$
+<body class="ke-modern">
+  <header class="ke-header ke-header-sm">
+    <div class="ke-container">
+      <input class="ke-nav-toggle" id="ke-nav-toggle" type="checkbox">
+      <label for="ke-nav-toggle" class="ke-nav-toggle-hamburger"><span>&#9776;</span></label>
+      <nav class="ke-nav">
+        <ul>
+          <li><a href="index-kernel.html">Home</a></li>
+          $if(theme-switch-url)$
+          <li><a href="$theme-switch-url$">Switch to ellegant theme</a></li>
+          $endif$
+        </ul>
+      </nav>
+    </div>
   </header>
 
-  <main>
+  <main class="ke-container ke-content">
+    $if(title)$<h1>$title$</h1>$endif$
+    $if(date)$<p><time datetime="$date$">$date$</time></p>$endif$
 $body$
 $include-after$
   </main>
 
   <footer>
-    <p>Built with Pandoc</p>
+    <div class="ke-bg-default ke-content">
+      <div class="ke-container">
+        <p>Built with Pandoc</p>
+      </div>
+    </div>
   </footer>
 </body>
 </html>
