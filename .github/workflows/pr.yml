@@ -4,7 +4,7 @@ on:
   pull_request:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build-and-preview:
@@ -39,8 +39,25 @@ jobs:
       - name: Take screenshots
         run: bash screenshots.sh
 
-      - uses: actions/upload-artifact@v4
+      - name: Deploy screenshots to Pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          name: page-screenshots
-          path: screenshots/
-          retention-days: 3
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./screenshots
+          destination_dir: ci/${{ github.head_ref }}
+          keep_files: true
+
+      - name: Write summary
+        env:
+          BRANCH: ${{ github.head_ref }}
+        run: |
+          BASE_URL="https://bjuergens.github.io/blog/ci/${BRANCH}"
+          echo "## Page Screenshots" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          for f in screenshots/*.png; do
+            name=$(basename "$f" .png)
+            theme=$(echo "$name" | grep -q kernel && echo kernel || echo ellegant)
+            echo "### ${name} (${theme})" >> "$GITHUB_STEP_SUMMARY"
+            echo "![${name}](${BASE_URL}/${name}.png)" >> "$GITHUB_STEP_SUMMARY"
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+          done

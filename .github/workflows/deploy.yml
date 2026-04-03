@@ -5,9 +5,7 @@ on:
     branches: [main]
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
   group: pages
@@ -16,9 +14,6 @@ concurrency:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
 
@@ -28,19 +23,12 @@ jobs:
         run: bash build.sh
 
       - name: Take screenshots
-        run: bash screenshots.sh
+        run: |
+          bash screenshots.sh
+          cp -r screenshots public/ci/main/
 
-      - uses: actions/upload-artifact@v4
+      - uses: peaceiris/actions-gh-pages@v4
         with:
-          name: deploy-screenshots
-          path: screenshots/
-          retention-days: 3
-
-      - uses: actions/configure-pages@v5
-
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: public
-
-      - id: deployment
-        uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          keep_files: true
