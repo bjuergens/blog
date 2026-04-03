@@ -36,7 +36,7 @@ jobs:
 
       - name: Write summary
         run: |
-          BASE_URL="https://bjuergens.github.io/blog/ci/main"
+          BASE_URL="https://raw.githubusercontent.com/${{ github.repository }}/gh-pages/ci/main"
           echo "## Deploy Screenshots" >> "$GITHUB_STEP_SUMMARY"
           echo "" >> "$GITHUB_STEP_SUMMARY"
           for f in screenshots/*.png; do

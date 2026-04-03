@@ -55,7 +55,7 @@ jobs:
         env:
           BRANCH: ${{ github.head_ref }}
         run: |
-          BASE_URL="https://bjuergens.github.io/blog/ci/${BRANCH}"
+          BASE_URL="https://raw.githubusercontent.com/${{ github.repository }}/gh-pages/ci/${BRANCH}"
           echo "## Page Screenshots" >> "$GITHUB_STEP_SUMMARY"
           echo "" >> "$GITHUB_STEP_SUMMARY"
           for f in screenshots/*.png; do
