@@ -3,7 +3,7 @@ title: Tell Claude to Unfuck Himself
 date: 2026-04-03
 ---
 
-## Claude fucked himself into a corner
+*Claude fucked himself into a corner — What now?*
 
 **Symptom:** He adds layers of onion code and workarounds.
 
