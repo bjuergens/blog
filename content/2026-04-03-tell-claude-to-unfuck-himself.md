@@ -1,5 +1,5 @@
 ---
-title: Claude Fucked Himself Into a Corner
+title: Tell Claude to Unfuck Himself
 date: 2026-04-03
 ---
 
