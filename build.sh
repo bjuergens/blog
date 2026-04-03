@@ -15,8 +15,8 @@ mkdir -p "$PUBLIC_DIR/css"
 
 # Download CSS files
 echo "Downloading CSS frameworks..."
-curl -sL "$ELLEGANT_CSS_URL" -o "$PUBLIC_DIR/css/ellegant.min.css"
-curl -sL "$KERNEL_CSS_URL" -o "$PUBLIC_DIR/css/kernel.min.css"
+curl -sfL "$ELLEGANT_CSS_URL" -o "$PUBLIC_DIR/css/ellegant.min.css"
+curl -sfL "$KERNEL_CSS_URL" -o "$PUBLIC_DIR/css/kernel.min.css"
 
 # Collect post listings for landing page (one per theme)
 post_list_ellegant=""
@@ -25,7 +25,8 @@ for f in "$CONTENT_DIR"/[0-9][0-9][0-9][0-9]-*.md; do
   [ -e "$f" ] || continue
   filename=$(basename "$f" .md)
   title=$(grep -m1 '^title:' "$f" | sed 's/^title: *//')
-  date=$(echo "$filename" | grep -oP '^\d{4}-\d{2}-\d{2}')
+  [ -z "$title" ] && title="$filename"
+  date=$(echo "$filename" | grep -oE '^[0-9]{4}-[0-9]{2}-[0-9]{2}')
   post_list_ellegant="${post_list_ellegant}<li><time>${date}</time> &mdash; <a href=\"${filename}.html\">${title}</a></li>"
   post_list_kernel="${post_list_kernel}<li><time>${date}</time> &mdash; <a href=\"${filename}-kernel.html\">${title}</a></li>"
 done
