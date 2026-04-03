@@ -1,0 +1,38 @@
+name: Test Build
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pandoc/actions/setup@v1
+
+      - name: Build site
+        run: bash build.sh
+
+      - name: Verify output files exist
+        run: |
+          test -f public/index.html
+          test -f public/index-kernel.html
+          test -f public/css/ellegant.min.css
+          test -f public/css/kernel.min.css
+          # Check that each post has both theme variants
+          for f in content/[0-9][0-9][0-9][0-9]-*.md; do
+            slug=$(basename "$f" .md)
+            test -f "public/${slug}.html"
+            test -f "public/${slug}-kernel.html"
+          done
+
+      - name: Validate HTML structure
+        run: |
+          grep -q '<main>' public/index.html
+          grep -q 'Posts' public/index.html
+          grep -q 'css/ellegant.min.css' public/index.html
+          grep -q 'css/kernel.min.css' public/index-kernel.html
