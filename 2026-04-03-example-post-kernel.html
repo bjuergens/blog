@@ -7,17 +7,23 @@
   <meta name="date" content="2026-04-03">
   <link rel="stylesheet" href="css/kernel.min.css">
 </head>
-<body>
-  <header>
-    <nav>
-      <a href="index-kernel.html">Home</a>
-            <a href="2026-04-03-example-post.html">Switch to ellegant theme</a>
-          </nav>
-    <h1>Example Post</h1>
-    <p><time datetime="2026-04-03">2026-04-03</time></p>
+<body class="ke-modern">
+  <header class="ke-header ke-header-sm">
+    <div class="ke-container">
+      <input class="ke-nav-toggle" id="ke-nav-toggle" type="checkbox">
+      <label for="ke-nav-toggle" class="ke-nav-toggle-hamburger"><span>&#9776;</span></label>
+      <nav class="ke-nav">
+        <ul>
+          <li><a href="index-kernel.html">Home</a></li>
+                    <li><a href="2026-04-03-example-post.html">Switch to ellegant theme</a></li>
+                  </ul>
+      </nav>
+    </div>
   </header>
 
-  <main>
+  <main class="ke-container ke-content">
+    <h1>Example Post</h1>
+    <p><time datetime="2026-04-03">2026-04-03</time></p>
 <p>This is an example blog post.</p>
 <h2 id="a-section">A section</h2>
 <p>Here is some content with <strong>bold</strong> and <em>italic</em>
@@ -34,7 +40,11 @@ text to demonstrate styling.</p>
   </main>
 
   <footer>
-    <p>Built with Pandoc</p>
+    <div class="ke-bg-default ke-content">
+      <div class="ke-container">
+        <p>Built with Pandoc</p>
+      </div>
+    </div>
   </footer>
 </body>
 </html>
