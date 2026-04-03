@@ -17,47 +17,17 @@ jobs:
       - name: Build site
         run: bash build.sh
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: Install Playwright
-        run: npx playwright install chromium --with-deps
+      - name: Install wkhtmltopdf
+        run: sudo apt-get install -y -qq wkhtmltopdf
 
       - name: Take screenshots
         run: |
-          # Start a local server
-          cd public
-          python3 -m http.server 8080 &
-          SERVER_PID=$!
-          sleep 1
-          cd ..
-
           mkdir -p screenshots
 
-          npx playwright screenshot \
-            --viewport-size="1280,900" \
-            --full-page \
-            http://localhost:8080/index.html \
-            screenshots/index-ellegant.png
-
-          npx playwright screenshot \
-            --viewport-size="1280,900" \
-            --full-page \
-            http://localhost:8080/index-kernel.html \
-            screenshots/index-kernel.png
-
-          # Screenshot each post (both themes)
-          for f in public/[0-9][0-9][0-9][0-9]-*.html; do
+          for f in public/*.html; do
             name=$(basename "$f" .html)
-            npx playwright screenshot \
-              --viewport-size="1280,900" \
-              --full-page \
-              "http://localhost:8080/${name}.html" \
-              "screenshots/${name}.png"
+            wkhtmltoimage --width 1280 --quality 80 "$f" "screenshots/${name}.png"
           done
-
-          kill $SERVER_PID
 
       - uses: actions/upload-artifact@v4
         with:
