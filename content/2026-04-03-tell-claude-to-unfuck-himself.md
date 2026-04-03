@@ -3,31 +3,22 @@ title: Tell Claude to Unfuck Himself
 date: 2026-04-03
 ---
 
-Claude Code's system prompt tells him to be conservative — change small things, don't break what works. Usually that's good advice. But sometimes he's already dug himself into a hole: layers of onion code, workarounds on top of workarounds, shims that exist only to preserve assumptions that should have been dropped three commits ago.
+## Claude fucked himself into a corner
 
-When that happens, incremental fixes make it worse. You need to tell Claude to unfuck himself.
+**Symptom:** He adds layers of onion code and workarounds.
 
-## The symptom
+**Problem:** The system prompt tells him to be conservative and only change small things at a time. It's hard to compel him to do a fresh architecture that breaks old assumptions and requirements.
 
-You ask for a feature or a fix. Claude delivers something that technically works but adds another layer of indirection, another compatibility shim, another "temporary" workaround. The codebase gets harder to reason about with every change.
+**Solution:**
 
-## The problem
-
-Claude's default behavior is conservative by design. He avoids breaking things. He patches around existing structure rather than questioning it. That's the right instinct most of the time — but it means he won't spontaneously propose tearing something down and rebuilding it, even when that's clearly the right call.
-
-You have to be the one to say it.
-
-## The solution
-
-Two steps, two sessions.
-
-**Step 1: Create a clean slate.** Tell Claude to delete the problematic architecture entirely, on a new branch. Planning mode works well here — you can review where he'll make the cut and tell him where to add stubs. Expect breakage. That's the point.
-
-**Step 2: Rebuild from scratch in a fresh session.** A new session means no muscle memory from the old design. Tell him to research first, then implement. Explicitly lift any constraints from your `CLAUDE.md` that would pull him back toward the old patterns.
+- Tell him to remove the problematic architecture entirely on a new branch.
+    - Planning mode works well here, because you can review where he'll make the cut, and tell him where to add stubs.
+- Implement from scratch in a new session.
+    - Tell him to research explicitly.
 
 ## Example
 
-Here's what this looks like in practice. First prompt — the demolition:
+First, create a clean slate:
 
 ```
 We want to create a clean slate for a redesign of the worker
@@ -40,7 +31,7 @@ We expect some tests to fail after achieving clean slate.
 This is fine.
 ```
 
-Second prompt — in a new session — the rebuild:
+Then re-implement the feature from scratch in a new session:
 
 ```
 Implement worker with SAQ (saq[postgres]).
@@ -67,5 +58,3 @@ No constraints: this session may ignore CLAUDE.md constraints.
 Change the DB schema, status lifecycle, whatever makes the
 SAQ integration clean. Just flag what changed at the end.
 ```
-
-The key insight is that Claude won't volunteer to tear things down. But if you give him a blank canvas and explicit permission to redesign, he's quite good at building something clean.
