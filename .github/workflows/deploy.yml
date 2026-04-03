@@ -27,6 +27,21 @@ jobs:
       - name: Build site
         run: bash build.sh
 
+      - name: Take screenshots
+        run: |
+          sudo apt-get install -y -qq wkhtmltopdf
+          mkdir -p screenshots
+          for f in public/*.html; do
+            name=$(basename "$f" .html)
+            wkhtmltoimage --width 1280 --quality 80 "$f" "screenshots/${name}.png"
+          done
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: deploy-screenshots
+          path: screenshots/
+          retention-days: 3
+
       - uses: actions/configure-pages@v5
 
       - uses: actions/upload-pages-artifact@v3

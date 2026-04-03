@@ -49,3 +49,4 @@ jobs:
         with:
           name: page-screenshots
           path: screenshots/
+          retention-days: 3
