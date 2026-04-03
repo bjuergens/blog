@@ -1,5 +1,5 @@
 ---
-title: My Blog
+title: BjörnBlog
 ---
 
-Welcome to my blog.
+I think about software and nerdstuff. Sometimes it's worth writing about. Not sure if it's worth reading though.
