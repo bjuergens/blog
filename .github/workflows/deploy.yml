@@ -29,13 +29,18 @@ jobs:
 
       - name: Take screenshots
         run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq wkhtmltopdf
           mkdir -p screenshots
           for f in public/*.html; do
             name=$(basename "$f" .html)
-            wkhtmltoimage --enable-local-file-access --width 1280 --quality 80 "$f" "screenshots/${name}.png"
+            google-chrome --headless=new --no-sandbox --disable-gpu \
+              --screenshot="screenshots/${name}.png" --window-size=1280,900 \
+              "file://$(pwd)/$f"
           done
+
+      - name: Write summary
+        run: |
+          echo "## Deploy Screenshots" >> "$GITHUB_STEP_SUMMARY"
+          echo "*(download artifact below to view full resolution)*" >> "$GITHUB_STEP_SUMMARY"
 
       - uses: actions/upload-artifact@v4
         with:
