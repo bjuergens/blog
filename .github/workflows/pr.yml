@@ -1,0 +1,67 @@
+name: PR Check
+
+on:
+  pull_request:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gh-pages-deploy
+  cancel-in-progress: false
+
+jobs:
+  build-and-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pandoc/actions/setup@v1
+
+      - name: Build site
+        run: bash build.sh
+
+      - name: Verify output files
+        run: |
+          test -f public/index.html
+          test -f public/index-kernel.html
+          test -f public/css/ellegant.min.css
+          test -f public/css/kernel.min.css
+          for f in content/[0-9][0-9][0-9][0-9]-*.md; do
+            slug=$(basename "$f" .md)
+            test -f "public/${slug}.html"
+            test -f "public/${slug}-kernel.html"
+          done
+
+      - name: Validate HTML structure
+        run: |
+          grep -q '<main>' public/index.html
+          grep -q 'Posts' public/index.html
+          grep -q 'css/ellegant.min.css' public/index.html
+          grep -q 'css/kernel.min.css' public/index-kernel.html
+
+      - name: Take screenshots
+        run: bash screenshots.sh
+
+      - name: Deploy screenshots to Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./screenshots
+          destination_dir: ci/${{ github.head_ref }}
+          keep_files: true
+
+      - name: Write summary
+        env:
+          BRANCH: ${{ github.head_ref }}
+        run: |
+          BASE_URL="https://raw.githubusercontent.com/${{ github.repository }}/gh-pages/ci/${BRANCH}"
+          echo "## Page Screenshots" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          for f in screenshots/*.png; do
+            name=$(basename "$f" .png)
+            theme=$(echo "$name" | grep -q kernel && echo kernel || echo ellegant)
+            echo "### ${name} (${theme})" >> "$GITHUB_STEP_SUMMARY"
+            echo "![${name}](${BASE_URL}/${name}.png)" >> "$GITHUB_STEP_SUMMARY"
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+          done

@@ -1,0 +1,48 @@
+name: Build and Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gh-pages-deploy
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pandoc/actions/setup@v1
+
+      - name: Build site
+        run: bash build.sh
+
+      - name: Take screenshots
+        run: |
+          bash screenshots.sh
+          mkdir -p public/ci/main
+          cp -r screenshots/* public/ci/main/
+
+      - uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          keep_files: true
+
+      - name: Write summary
+        run: |
+          BASE_URL="https://raw.githubusercontent.com/${{ github.repository }}/gh-pages/ci/main"
+          echo "## Deploy Screenshots" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          for f in screenshots/*.png; do
+            name=$(basename "$f" .png)
+            theme=$(echo "$name" | grep -q kernel && echo kernel || echo ellegant)
+            echo "### ${name} (${theme})" >> "$GITHUB_STEP_SUMMARY"
+            echo "![${name}](${BASE_URL}/${name}.png)" >> "$GITHUB_STEP_SUMMARY"
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+          done
