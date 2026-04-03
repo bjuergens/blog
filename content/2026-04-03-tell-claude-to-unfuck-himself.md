@@ -13,6 +13,7 @@ date: 2026-04-03
 
 - Tell him to remove the problematic architecture entirely on a new branch.
     - Planning mode works well here, because you can review where he'll make the cut, and tell him where to add stubs.
+    - Tell him to leave grepable marker-comments at the cutting-boundary.
 - Implement from scratch in a new session.
     - Tell him to research explicitly.
 
@@ -54,7 +55,7 @@ Todo:
 3. Plan and implement the migration — you are free to
    restructure the DB model, schema, and constraints
 
-No constraints: this session may ignore CLAUDE.md constraints.
+No constraints: you may ignore CLAUDE.md constraints.
 Change the DB schema, status lifecycle, whatever makes the
 SAQ integration clean. Just flag what changed at the end.
 ```
