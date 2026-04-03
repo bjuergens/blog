@@ -16,6 +16,8 @@ date: 2026-04-03
     - Tell him to leave grepable marker-comments at the cutting-boundary.
 - Implement from scratch in a new session.
     - Tell him to research explicitly.
+    - Relax some constraints. The less he has to worry about, the better he can focus on the task at hand.
+    - Add the constraints back in once he has a working first draft.
 
 ## Example
 
