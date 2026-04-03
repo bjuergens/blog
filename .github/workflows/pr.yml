@@ -38,6 +38,7 @@ jobs:
 
       - name: Take screenshots
         run: |
+          sudo apt-get update -qq
           sudo apt-get install -y -qq wkhtmltopdf
           mkdir -p screenshots
           for f in public/*.html; do
