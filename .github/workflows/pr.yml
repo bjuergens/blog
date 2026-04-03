@@ -1,4 +1,4 @@
-name: Test Build
+name: PR Check
 
 on:
   pull_request:
@@ -7,7 +7,7 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  build-and-preview:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -17,13 +17,12 @@ jobs:
       - name: Build site
         run: bash build.sh
 
-      - name: Verify output files exist
+      - name: Verify output files
         run: |
           test -f public/index.html
           test -f public/index-kernel.html
           test -f public/css/ellegant.min.css
           test -f public/css/kernel.min.css
-          # Check that each post has both theme variants
           for f in content/[0-9][0-9][0-9][0-9]-*.md; do
             slug=$(basename "$f" .md)
             test -f "public/${slug}.html"
@@ -36,3 +35,17 @@ jobs:
           grep -q 'Posts' public/index.html
           grep -q 'css/ellegant.min.css' public/index.html
           grep -q 'css/kernel.min.css' public/index-kernel.html
+
+      - name: Take screenshots
+        run: |
+          sudo apt-get install -y -qq wkhtmltopdf
+          mkdir -p screenshots
+          for f in public/*.html; do
+            name=$(basename "$f" .html)
+            wkhtmltoimage --width 1280 --quality 80 "$f" "screenshots/${name}.png"
+          done
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: page-screenshots
+          path: screenshots/
