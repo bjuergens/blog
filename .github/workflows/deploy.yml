@@ -28,19 +28,7 @@ jobs:
         run: bash build.sh
 
       - name: Take screenshots
-        run: |
-          mkdir -p screenshots
-          for f in public/*.html; do
-            name=$(basename "$f" .html)
-            google-chrome --headless=new --no-sandbox --disable-gpu \
-              --screenshot="screenshots/${name}.png" --window-size=1280,900 \
-              "file://$(pwd)/$f"
-          done
-
-      - name: Write summary
-        run: |
-          echo "## Deploy Screenshots" >> "$GITHUB_STEP_SUMMARY"
-          echo "*(download artifact below to view full resolution)*" >> "$GITHUB_STEP_SUMMARY"
+        run: bash screenshots.sh
 
       - uses: actions/upload-artifact@v4
         with:

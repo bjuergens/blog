@@ -37,26 +37,7 @@ jobs:
           grep -q 'css/kernel.min.css' public/index-kernel.html
 
       - name: Take screenshots
-        run: |
-          mkdir -p screenshots
-          for f in public/*.html; do
-            name=$(basename "$f" .html)
-            google-chrome --headless=new --no-sandbox --disable-gpu \
-              --screenshot="screenshots/${name}.png" --window-size=1280,900 \
-              "file://$(pwd)/$f"
-          done
-
-      - name: Write summary
-        run: |
-          echo "## Page Screenshots" >> "$GITHUB_STEP_SUMMARY"
-          echo "Download the **page-screenshots** artifact below to view rendered pages." >> "$GITHUB_STEP_SUMMARY"
-          echo "" >> "$GITHUB_STEP_SUMMARY"
-          echo "| Page | Theme |" >> "$GITHUB_STEP_SUMMARY"
-          echo "|------|-------|" >> "$GITHUB_STEP_SUMMARY"
-          for f in screenshots/*.png; do
-            name=$(basename "$f" .png)
-            echo "| ${name} | $(echo "$name" | grep -q kernel && echo kernel || echo ellegant) |" >> "$GITHUB_STEP_SUMMARY"
-          done
+        run: bash screenshots.sh
 
       - uses: actions/upload-artifact@v4
         with:
