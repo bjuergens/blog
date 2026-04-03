@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>$if(title)$$title$ | $endif$Blog</title>
+  $if(date)$<meta name="date" content="$date$">$endif$
+  <link rel="stylesheet" href="css/kernel.min.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index-kernel.html">Home</a>
+      $if(theme-switch-url)$
+      <a href="$theme-switch-url$">Switch to ellegant theme</a>
+      $endif$
+    </nav>
+    $if(title)$<h1>$title$</h1>$endif$
+    $if(date)$<p><time datetime="$date$">$date$</time></p>$endif$
+  </header>
+
+  <main>
+$body$
+$include-after$
+  </main>
+
+  <footer>
+    <p>Built with Pandoc</p>
+  </footer>
+</body>
+</html>
