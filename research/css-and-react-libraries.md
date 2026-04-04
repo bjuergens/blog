@@ -18,6 +18,10 @@ Since the project currently has no React at all, you'll need a framework to buil
 | **Remix** | ~32k | Merged into React Router | Wrong tool for static content. |
 | **Gatsby** | ~55k | Maintenance mode (Netlify acquisition) | Not recommended for new projects. |
 
+**Demo links:**
+- Astro: https://astro.build/ · Showcase: https://astro.build/showcase/ · Try in browser: https://astro.new/latest/
+- Next.js: https://nextjs.org/ · Showcase: https://nextjs.org/showcase
+
 **Recommendation:** Astro. Your existing `.md` files drop into `src/content/` with minimal changes. MDX available when you want React components in posts.
 
 ---
@@ -38,6 +42,8 @@ Since the project currently has no React at all, you'll need a framework to buil
 
 **Used by:** Netflix, Vercel, Shopify, OpenAI (docs), Clerk, 26k+ companies.
 
+**Demo:** https://tailwindcss.com/ · Playground: https://play.tailwindcss.com/
+
 **Pros:** Massive ecosystem (shadcn/ui, daisyUI, typography plugin, blog templates). First-class Next.js/Astro support. v4 is 5x faster builds. Rapid prototyping.
 **Cons:** Verbose class strings in JSX. Requires learning utility vocabulary. Some v3→v4 migration pain.
 
@@ -56,6 +62,8 @@ Since the project currently has no React at all, you'll need a framework to buil
 | Bundle Size | ~3.5kB min+gzip, zero deps |
 
 **Used by:** 421+ companies. Strong in Vue/Nuxt ecosystem. Created by Anthony Fu (Vue/Vite core team).
+
+**Demo:** https://unocss.dev/ · Interactive docs: https://unocss.dev/interactive/ · Playground: https://unocss.dev/play/
 
 **Pros:** 5x faster than Tailwind JIT. Tailwind-compatible preset. Pure CSS icons, attributify mode. Smallest possible output.
 **Cons:** Much smaller ecosystem than Tailwind. Fewer blog templates. Stronger Vue adoption; less common in React/Next.js.
@@ -76,6 +84,8 @@ Since the project currently has no React at all, you'll need a framework to buil
 
 **Used by:** Shopify (Polaris), SEEK, Glean, Remix docs.
 
+**Demo:** https://vanilla-extract.style/
+
 **Pros:** True zero-runtime. Full TypeScript type safety. Sprinkles API for atomic styles. Created by Mark Dalgleish (co-creator of CSS Modules). Mature with 1.3M+ weekly downloads.
 **Cons:** Requires separate `.css.ts` files (more boilerplate). Learning curve for Sprinkles/Recipes. No inline styles. Fewer blog starters.
 
@@ -94,6 +104,8 @@ Since the project currently has no React at all, you'll need a framework to buil
 | Bundle Size | Zero runtime |
 
 **Used by:** Created by Segun Adebayo (Chakra UI creator). Adopted by teams migrating from Chakra UI.
+
+**Demo:** https://panda-css.com/ · Playground: https://play.panda-css.com/
 
 **Pros:** Zero runtime. Full TypeScript autocomplete. Built-in design token system. Works with React Server Components.
 **Cons:** Smaller community. Handles dynamic styles poorly (build-time limitation). Relatively young.
@@ -114,6 +126,8 @@ Since the project currently has no React at all, you'll need a framework to buil
 
 **Used by:** Created by Adam Argyle (Google Chrome CSS developer advocate). Popular in CSS education community.
 
+**Demo:** https://open-props.style/
+
 **Pros:** Extremely lightweight. Framework-agnostic. Total design flexibility. Progressive enhancement friendly. Built by a CSS standards expert.
 **Cons:** Not a framework — you write all your own CSS. Sparse docs. Fewer templates. v2 still in beta.
 
@@ -133,6 +147,8 @@ Since the project currently has no React at all, you'll need a framework to buil
 
 **Used by:** Meta (Facebook, Instagram, WhatsApp, Messenger, Threads), Figma, Snowflake.
 
+**Demo:** https://stylexjs.com/ · Playground: https://stylexjs.com/playground/
+
 **Pros:** Battle-tested at Meta scale. Atomic CSS output plateaus as app grows. Full TypeScript. RSC compatible.
 **Cons:** Still pre-1.0 (v0.17.x). Smaller community. Designed for scale — overkill for a blog. Requires bundler plugin.
 
@@ -151,6 +167,8 @@ Since the project currently has no React at all, you'll need a framework to buil
 | Bundle Size | Zero runtime |
 
 **Used by:** MUI / Material UI (planned default for future MUI versions).
+
+**Demo:** https://mui.com/material-ui/experimental-api/pigment-css/ (no standalone playground — alpha)
 
 **Pros:** Natural MUI upgrade path. 20% reduction in first-load JS vs Emotion. RSC compatible.
 **Cons:** **Still alpha.** No releases since January 2025. Very small community. Tightly coupled to MUI.
@@ -188,6 +206,8 @@ Since the project currently has no React at all, you'll need a framework to buil
 
 **Used by:** Vercel (official adoption), widely across the Next.js ecosystem.
 
+**Demo:** https://ui.shadcn.com/ · Examples: https://ui.shadcn.com/examples/dashboard · Playground: https://ui.shadcn.com/examples/playground
+
 **Pros:** Beautiful defaults (Card, Typography, Badge, Table, Tabs). Full code ownership — no dependency lock-in. Massive community, thousands of blog templates. Tailwind-first.
 **Cons:** Components copied into codebase = maintenance burden. Manual per-component install. Tight Tailwind coupling.
 
@@ -207,6 +227,8 @@ Since the project currently has no React at all, you'll need a framework to buil
 | Accessibility | WAI-ARIA patterns, focus management, keyboard nav |
 
 **Used by:** Vercel, Linear, WorkOS, CodeSandbox, Supabase.
+
+**Demo:** https://www.radix-ui.com/ · Themes playground: https://www.radix-ui.com/themes/playground · Primitives: https://www.radix-ui.com/primitives
 
 **Pros:** Battle-tested primitives (Dialog, Popover, Dropdown, Tooltip). Zero style opinions = full design freedom. Tree-shakable.
 **Cons:** Must build all styling yourself. No page-level components. Development pace has slowed since WorkOS acquisition.
@@ -228,6 +250,8 @@ Since the project currently has no React at all, you'll need a framework to buil
 
 **Used by:** Microsoft, CodeParrot, SegmentX, many startups.
 
+**Demo:** https://mantine.dev/ · Pre-built UI components: https://ui.mantine.dev/
+
 **Pros:** Most complete all-in-one: RichTextEditor (Tiptap-based), code highlighting, notifications, forms, dates. Excellent docs. Built-in dark mode. v9 just released.
 **Cons:** Opinionated styling (harder to make unique). Larger bundle. Tied to Mantine ecosystem.
 
@@ -247,6 +271,8 @@ Since the project currently has no React at all, you'll need a framework to buil
 | Accessibility | **Gold standard.** WAI-ARIA, 30+ language localizations, RTL, internationalized dates/numbers |
 
 **Used by:** Adobe (Creative Cloud, Experience Platform), Untitled UI.
+
+**Demo:** https://react-aria.adobe.com/ · Components: https://react-spectrum.adobe.com/react-aria/components.html
 
 **Pros:** Best-in-class accessibility and i18n. Adobe-backed enterprise reliability. Both hooks and component APIs.
 **Cons:** Steeper learning curve (verbose API). No visual output. Smaller template ecosystem. Overkill for a simple English-only blog.
@@ -268,6 +294,8 @@ Since the project currently has no React at all, you'll need a framework to buil
 
 **Used by:** Tailwind UI (paid component kit), broadly in the Tailwind ecosystem.
 
+**Demo:** https://headlessui.com/ (inline interactive examples per component, e.g. https://headlessui.com/react/menu)
+
 **Pros:** Official Tailwind companion. Simple API. Lightweight. Well-documented.
 **Cons:** **Very limited** — only ~10–16 components. No forms, tables, toasts. Last release September 2025. Need supplemental libraries.
 
@@ -287,6 +315,8 @@ Since the project currently has no React at all, you'll need a framework to buil
 | Accessibility | Strong — inherits React Aria |
 
 **Used by:** Tidyread, Quantera.ai, popular with Next.js developers.
+
+**Demo:** https://heroui.com/ · Storybook: https://storybook-v3.heroui.com
 
 **Pros:** Beautiful modern design out of the box. Tailwind customization. React Aria accessibility.
 **Cons:** Rebrand adds confusion (NextUI→HeroUI). Smaller community than Mantine/Radix. Lower npm downloads = less battle-testing.
@@ -308,6 +338,8 @@ Since the project currently has no React at all, you'll need a framework to buil
 
 **Used by:** Chakra UI ecosystem. Park UI is built on top of it.
 
+**Demo:** https://ark-ui.com/ · Showcase: https://ark-ui.com/showcase
+
 **Pros:** State-machine-driven = predictable and bug-resistant. Framework-agnostic (React, Vue, Solid, Svelte). 45+ components. Clean API.
 **Cons:** Smaller community. Fewer blog examples. Must build all styles. Still young.
 
@@ -327,6 +359,8 @@ Since the project currently has no React at all, you'll need a framework to buil
 | Accessibility | Inherits Ark UI's accessibility |
 
 **Used by:** Chakra/Panda CSS ecosystem adopters.
+
+**Demo:** https://park-ui.com/ (component demos inline in docs)
 
 **Pros:** shadcn/ui alternative for Panda CSS users. Code ownership model. Multiple style variants.
 **Cons:** Very small community. Young project. Tightly coupled to Ark/Panda ecosystem.
